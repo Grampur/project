@@ -10,6 +10,6 @@ const router = Router();
 router.get('/', AccountController.getAllAccounts)
 router.post('/', AccountController.createAccount)
 router.patch('/:id', AccountController.updateAccount)
-router.delete('/:id', RAccountController.deleteAccount)
+router.delete('/:id', AccountController.deleteAccount)
   
 export default router;

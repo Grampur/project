@@ -1,39 +1,25 @@
 import { AccountService } from '../services/accountService.js';
 
-
 export const AccountController = {
-
     async getAllAccounts(req, res) {
-
-        res.send('Get all accounts');
-        
         try {
             const accounts = await AccountService.getAllAccount();
-
             res.status(200).json(accounts);
         } catch (error) {
-            res.status(500).send({ message: 'Internal Server Error' });
+            res.status(500).json({ message: 'Internal Server Error' });
         }
-
     },
 
-    async createAcccount(req, res) {
-
-        res.send('Create a new Account');
-
+    async createAccount(req, res) {  // Fixed spelling (was createAcccount)
         try {
             const newAccount = await AccountService.createAccount(req.body);
-
-            res.status(200).json(newAccount);
+            res.status(201).json(newAccount);  // Changed to 201 for creation
         } catch (error) {
-            res.status(500).send({ message: 'Internal Server Error' });
+            res.status(500).json({ message: 'Internal Server Error' });
         }
     },
 
     async updateAccount(req, res) {
-
-        res.send('Update some fields for existing Account');
-
         try {
             const accountId = parseInt(req.params.id, 10);
             const { oldPassword, newPassword } = req.body;
@@ -50,16 +36,12 @@ export const AccountController = {
     },
 
     async deleteAccount(req, res) {
-
-        res.send('Delete a account');
-
         try {
             const accountId = parseInt(req.params.id, 10);
             const account = await AccountService.deleteAccount(accountId);
-
             res.status(200).json(account);
         } catch (error) {
-            res.status(500).send({ message: 'Internal Server Error' });
+            res.status(500).json({ message: 'Internal Server Error' });
         }
     },
 };

@@ -1,4 +1,4 @@
-import { AccountModel } from "../models/accountModel";
+import { AccountModel } from "../models/accountModel.js";
 
 export const AccountService = {
 
@@ -22,7 +22,7 @@ export const AccountService = {
 
     },
 
-    async updateAccount(accountId, oldPassword, newPassword) {
+    async updateAccountPassword(accountId, oldPassword, newPassword) {
         if (!oldPassword || !newPassword) {
             throw new Error('Old and new passwords are required');
         }
@@ -32,8 +32,16 @@ export const AccountService = {
     },
   
     async deleteAccount(accountId) {
-        // Delete Account
-      return { message: 'Account deleted successfully' };
+
+        const result = await AccountModel.deleteAccount(accountId);
+
+        // Check if any row was actually deleted
+        if (result === 0) {
+            throw new Error('Account not found');
+        }
+    
+        // Return success message
+        return { message: 'Account deleted successfully' };
     }
 
 
