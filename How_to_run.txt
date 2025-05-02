@@ -7,6 +7,9 @@ run seeding users file:
 creating users table (use up()/down() at the end to create/drop table): 
     node --env-file=.env src/migrations/20250429_create_users_table.js
 
+creating sessions_table (use up()/down() at the end to create/drop table):
+    node --env-file=.env src/migrations/20250429_create_sessions_table.js
+
 Testing Welcome route:
     GET - http://localhost:3001
 

@@ -44,4 +44,43 @@ export const AccountController = {
             res.status(500).json({ message: 'Internal Server Error' });
         }
     },
+
+    async login(req, res) {
+        try {
+            const { email, password } = req.body;
+            const user = await AccountService.verifyCredentials(email, password);
+
+            if (user) {
+                // Store user info in session
+                req.session.userId = user.id;
+                req.session.userEmail = user.email;
+                req.session.isAdmin = user.admin;
+              
+                res.status(200).json({
+                    message: 'Login successful',
+                    user: {
+                        id: user.id,
+                        email: user.email,
+                        name: user.name,
+                        admin: user.admin
+                    }
+                });
+            } else {
+                res.status(401).json({ message: 'Invalid credentials' });
+            }
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+
+    async logout(req, res) {
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(500).json({ message: 'Error logging out' });
+            }
+            res.clearCookie('connect.sid');
+            res.status(200).json({ message: 'Logged out successfully' });
+        });
+    }
+
 };

@@ -1,4 +1,5 @@
 import { AccountModel } from "../models/accountModel.js";
+import argon2 from 'argon2';
 
 export const AccountService = {
 
@@ -42,7 +43,22 @@ export const AccountService = {
     
         // Return success message
         return { message: 'Account deleted successfully' };
-    }
+    },
 
+    async verifyCredentials(email, password) {
+      
+        const user = await AccountModel.findByEmail(email);
+      
+        if (!user) {
+            return null;
+        }
+      
+        const isValidPassword = await argon2.verify(user.password, password);
+        if (!isValidPassword) {
+            return null;
+        }
+
+        return user;
+    }
 
 };

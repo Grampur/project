@@ -53,5 +53,12 @@ export const AccountModel = {
     async deleteAccount(accountId) {
         const result = await db.query('DELETE FROM users WHERE id = $1', [accountId]);
         return result.rowCount;
+    },
+
+    async findByEmail(email) {
+        const query = 'SELECT * FROM accounts WHERE email = $1';
+        const result = await pool.query(query, [email]);
+        return result.rows[0];
     }
+    
 };
