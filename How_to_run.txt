@@ -24,6 +24,14 @@ Testing createAccount:
             "email": "test@example.com",
             "password": "testpassword123"
         }
+    
+    FOR BAD FIELDS:
+
+        {
+            "name": "", // invalid: empty string
+            "email": "notanemail", // invalid: not email format
+            "password": "123" // invalid: too short
+        }
 
 Testing updateAccount:
     Patch - http://localhost:3001/accounts/{id}

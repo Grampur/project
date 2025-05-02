@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { AccountController } from "../controllers/accountControllers.js";
+import { validateData } from "../middleware/validationMiddleware.js";
+import { createAccountSchema, updatePasswordSchema } from "../schemas/accountSchemas.js";
 
 const router = Router();
 
@@ -8,8 +10,8 @@ const router = Router();
 // }); 
 
 router.get('/', AccountController.getAllAccounts)
-router.post('/', AccountController.createAccount)
-router.patch('/:id', AccountController.updateAccount)
+router.post('/', validateData(createAccountSchema), AccountController.createAccount);
+router.patch('/:id', validateData(updatePasswordSchema), AccountController.updateAccount);
 router.delete('/:id', AccountController.deleteAccount)
   
 export default router;
