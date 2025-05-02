@@ -11,10 +11,11 @@ const PostgresqlStore = pgSession(session);
 const sessionStore = new PostgresqlStore({
 
   pool: pool,
-  tableName: 'user_sessions'
+  tableName: 'sessions'
 
 });
 
+app.use(express.json()) 
 app.use(session({
 
   store: sessionStore,
@@ -33,7 +34,6 @@ app.get('/', (req, res) => {
   res.send('Welcome to SwipeDish/Trip')
 })
 
-app.use(express.json()) 
 app.use('/accounts', accountRoutes)
 
 app.listen(PORT, () => {

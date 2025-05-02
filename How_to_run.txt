@@ -23,7 +23,7 @@ Testing createAccount:
 
         {
             "name": "Test User",
-            "admin": 0,
+            "admin": false,
             "email": "test@example.com",
             "password": "testpassword123"
         }

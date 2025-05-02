@@ -6,13 +6,13 @@ async function seedUsers() {
     {
       name: 'Gagan Rampur',
       email: 'grampur123@gmail.com',
-      admin: 1,
+      admin: true,
       password: 'PASSWORD'
     },
     {
       name: 'Test test',
       email: 'test@gmail.com',
-      admin: 0,
+      admin: false,
       password: 'PASSWORD'
     },
   ];

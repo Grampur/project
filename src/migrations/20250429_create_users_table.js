@@ -5,7 +5,7 @@ export async function up() {
     await db.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
-        admin INTEGER DEFAULT 0,
+        admin BOOLEAN DEFAULT false,
         name VARCHAR(100) UNIQUE NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR(100) NOT NULL, 
