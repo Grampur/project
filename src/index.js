@@ -3,10 +3,20 @@ import session from 'express-session';
 import pgSession from 'connect-pg-simple';
 import accountRoutes from './routes/accountRoutes.js'; 
 import pool from './config/db.js';
+import cors from 'cors';
+
+
 
 const app = express()
 const PORT = process.env.PORT || 3000;
 const PostgresqlStore = pgSession(session);
+
+app.use(cors({
+
+  origin: 'http://localhost:8081',
+  credentials: true
+
+}));
 
 const sessionStore = new PostgresqlStore({
 
