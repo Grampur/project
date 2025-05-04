@@ -29,21 +29,22 @@ export default function IndexScreen() {
   };
 
   return (
-    // Wrap the main view in GestureHandlerRootView
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={styles.container}>
         <Text style={styles.header}>Login successful</Text>
-        {places
-          .slice(currentIndex, currentIndex + 2)
-          .reverse()
-          .map((place) => (
-            <SwipeableCard
-              key={place.id}
-              place={place}
-              onSwipeLeft={handleSwipeLeft}
-              onSwipeRight={handleSwipeRight}
-            />
-          ))}
+        <View style={styles.cardContainer}>
+          {places
+            .slice(currentIndex, currentIndex + 2)
+            .reverse()
+            .map((place) => (
+              <SwipeableCard
+                key={place.id}
+                place={place}
+                onSwipeLeft={handleSwipeLeft}
+                onSwipeRight={handleSwipeRight}
+              />
+            ))}
+        </View>
       </View>
     </GestureHandlerRootView>
   );
@@ -52,13 +53,21 @@ export default function IndexScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 80,
+    paddingTop: 20,
     alignItems: 'center',
     backgroundColor: '#fff',
   },
   header: {
-    fontSize: 18,
-    marginBottom: 30,
+    fontSize: 24,
+    marginBottom: 15,
     fontWeight: 'bold',
+    marginTop: 20, // Add top margin to push header down from top
+  },
+  cardContainer: {  // Add new container for cards
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    width: '100%',
   },
 });
