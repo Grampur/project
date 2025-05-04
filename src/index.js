@@ -13,7 +13,7 @@ const PostgresqlStore = pgSession(session);
 
 app.use(cors({
 
-  origin: 'http://localhost:8081',
+  origin: ['http://localhost:8081', 'http://192.168.1.66:8081'],
   credentials: true
 
 }));
@@ -28,14 +28,16 @@ const sessionStore = new PostgresqlStore({
 app.use(express.json()) 
 app.use(session({
 
+  // 
   store: sessionStore,
-  secret: process.env.SESSION_SECRET || 'your-secret-key',
+  secret: process.env.SESSION_SECRET || 'secret-key',
   resave: false,
   saveUninitialized: false,
   cookie: {
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    maxAge: 24 * 60 * 60 * 1000,
+    sameSite: 'none'
   }
 
 }));
