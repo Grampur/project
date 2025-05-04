@@ -1,7 +1,8 @@
 import express from 'express';
 import session from 'express-session';
 import pgSession from 'connect-pg-simple';
-import accountRoutes from './routes/accountRoutes.js'; 
+import accountRoutes from './routes/accountRoutes.js';
+import userInteractionRoutes from './routes/userInteractionsRoutes.js'; 
 import pool from './config/db.js';
 import cors from 'cors';
 
@@ -47,6 +48,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/accounts', accountRoutes)
+app.use('/api/interactions', userInteractionRoutes);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)

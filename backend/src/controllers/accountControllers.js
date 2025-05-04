@@ -10,10 +10,10 @@ export const AccountController = {
         }
     },
 
-    async createAccount(req, res) {  // Fixed spelling (was createAcccount)
+    async createAccount(req, res) {
         try {
             const newAccount = await AccountService.createAccount(req.body);
-            res.status(201).json(newAccount);  // Changed to 201 for creation
+            res.status(201).json(newAccount);
         } catch (error) {
             res.status(500).json({ message: 'Internal Server Error' });
         }
