@@ -13,7 +13,7 @@ const PostgresqlStore = pgSession(session);
 
 app.use(cors({
 
-  origin: ['http://localhost:8081', 'http://192.168.1.66:8081'],
+  origin: ['http://localhost:8081', 'http://192.168.1.66:8081', 'http://192.168.1.66:3001'],
   credentials: true
 
 }));
