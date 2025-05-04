@@ -31,7 +31,6 @@ export default function IndexScreen() {
 
   const handleLogout = async () => {
     try {
-      // Make sure to use the correct backend URL
       const response = await axios.post('http://192.168.1.66:3001/accounts/logout', {}, {
         withCredentials: true // Important for sending cookies
       });
