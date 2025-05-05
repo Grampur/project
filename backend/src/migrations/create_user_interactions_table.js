@@ -47,7 +47,8 @@ export async function up() {
         category_name VARCHAR(100) NOT NULL,
         preference_score FLOAT DEFAULT 0,
         interaction_count INT DEFAULT 0,
-        last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        unique(user_id, category_name)
       );
     `);
 
@@ -55,7 +56,7 @@ export async function up() {
     await db.query(`
       CREATE TABLE IF NOT EXISTS interaction_metrics (
         id SERIAL PRIMARY KEY,
-        user_id INT REFERENCES users(id) ON DELETE CASCADE,
+        user_id INT REFERENCES users(id) ON DELETE CASCADE UNIQUE,
         avg_view_time FLOAT DEFAULT 0,
         daily_swipe_count INT DEFAULT 0,
         last_active TIMESTAMP,
@@ -83,6 +84,5 @@ export async function down() {
     throw error;
   }
 }
-
 
 up()
