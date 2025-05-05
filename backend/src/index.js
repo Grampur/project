@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/accounts', accountRoutes)
-app.use('/api/interactions', userInteractionRoutes);
+app.use('/interactions', userInteractionRoutes);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)

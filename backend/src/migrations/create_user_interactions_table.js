@@ -8,7 +8,7 @@ export async function up() {
       CREATE TABLE IF NOT EXISTS liked_places (
         id SERIAL PRIMARY KEY,
         user_id INT REFERENCES users(id) ON DELETE CASCADE,
-        place_id INT NOT NULL,
+        place_id VARCHAR(255) NOT NULL,
         place_name VARCHAR(255) NOT NULL,
         liked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
@@ -19,7 +19,7 @@ export async function up() {
       CREATE TABLE IF NOT EXISTS skipped_places (
         id SERIAL PRIMARY KEY,
         user_id INT REFERENCES users(id) ON DELETE CASCADE,
-        place_id INT NOT NULL,
+        place_id VARCHAR(255) NOT NULL,
         place_name VARCHAR(255) NOT NULL,
         skipped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
