@@ -19,14 +19,34 @@ const places: Place[] = [
 export default function IndexScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleSwipeLeft = (place: Place) => {
-    console.log('Skipped:', place.name);
-    setCurrentIndex((prev) => prev + 1);
+  const handleSwipeLeft = async (place: Place) => {
+    try {
+      await axios.post('http://192.168.1.66:3001/interactions/skips', {
+        placeId: place.id,
+        placeName: place.name
+      }, {
+        withCredentials: true
+      });
+      console.log('Skipped:', place.name);
+      setCurrentIndex((prev) => prev + 1);
+    } catch (error) {
+      console.error('Failed to record skipped place:', error);
+    }
   };
 
-  const handleSwipeRight = (place: Place) => {
-    console.log('Liked:', place.name);
-    setCurrentIndex((prev) => prev + 1);
+  const handleSwipeRight = async (place: Place) => {
+    try {
+      await axios.post('http://192.168.1.66:3001/interactions/likes', {
+        placeId: place.id,
+        placeName: place.name
+      }, {
+        withCredentials: true
+      });
+      console.log('Liked:', place.name);
+      setCurrentIndex((prev) => prev + 1);
+    } catch (error) {
+      console.error('Failed to record liked place:', error);
+    }
   };
 
   const handleLogout = async () => {
