@@ -22,7 +22,7 @@ export const UserInteractionController = {
 
     async getLikedPlaces(req, res) {
         try {
-            const userId = req.user.id;
+            const userId = req.session.userId;
             const likedPlaces = await UserInteractionService.getUserLikedPlaces(userId);
             res.status(200).json({
                 success: true,
@@ -39,7 +39,7 @@ export const UserInteractionController = {
     // Skipped Places Controllers
     async addSkippedPlace(req, res) {
         try {
-            const userId = req.user.id;
+            const userId = req.session.userId;
             const placeData = req.body;
             
             const result = await UserInteractionService.addSkippedPlace(userId, placeData);
@@ -57,7 +57,7 @@ export const UserInteractionController = {
 
     async getSkippedPlaces(req, res) {
         try {
-            const userId = req.user.id;
+            const userId = req.session.userId;
             const skippedPlaces = await UserInteractionService.getUserSkippedPlaces(userId);
             res.status(200).json({
                 success: true,
@@ -74,7 +74,7 @@ export const UserInteractionController = {
     // User Engagement Controllers
     async startSession(req, res) {
         try {
-            const userId = req.user.id;
+            const userId = req.session.userId;
             const session = await UserInteractionService.startUserSession(userId);
             res.status(201).json({
                 success: true,
@@ -109,7 +109,7 @@ export const UserInteractionController = {
     // Category Preferences Controllers
     async updateCategoryPreference(req, res) {
         try {
-            const userId = req.user.id;
+            const userId = req.session.userId;
             const categoryData = req.body;
             
             const result = await UserInteractionService.updateCategoryPreference(userId, categoryData);
@@ -127,7 +127,7 @@ export const UserInteractionController = {
 
     async getCategoryPreferences(req, res) {
         try {
-            const userId = req.user.id;
+            const userId = req.session.userId;
             const preferences = await UserInteractionService.getUserCategoryPreferences(userId);
             res.status(200).json({
                 success: true,
@@ -144,7 +144,7 @@ export const UserInteractionController = {
     // Interaction Metrics Controllers
     async getInteractionMetrics(req, res) {
         try {
-            const userId = req.user.id;
+            const userId = req.session.userId;
             const metrics = await UserInteractionService.getInteractionMetrics(userId);
             res.status(200).json({
                 success: true,
@@ -161,7 +161,7 @@ export const UserInteractionController = {
     // Composite Controllers
     async processPlaceInteraction(req, res) {
         try {
-            const userId = req.user.id;
+            const userId = req.session.userId;
             const { placeData, action } = req.body;
             
             const result = await UserInteractionService.processPlaceInteraction(
