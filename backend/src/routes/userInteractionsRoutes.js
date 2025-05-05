@@ -1,10 +1,10 @@
 import express from 'express';
 import { UserInteractionController } from '../controllers/userInteractionController.js';
-import { authenticateToken } from '../middleware/authMiddleware.js';
+import { isAuthenticated } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.use(authenticateToken);
+router.use(isAuthenticated);
 
 // Liked Places Routes
 router.post('/likes', UserInteractionController.addLikedPlace);

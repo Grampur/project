@@ -1,10 +1,10 @@
-import { UserInteractionService } from '../services/userInteractionService.js';
+import { UserInteractionService } from '../services/userInteractionsService.js';
 
 export const UserInteractionController = {
     // Liked Places Controllers
     async addLikedPlace(req, res) {
         try {
-            const userId = req.user.id;
+            const userId = req.session.userId;
             const placeData = req.body;
             
             const result = await UserInteractionService.addLikedPlace(userId, placeData);
